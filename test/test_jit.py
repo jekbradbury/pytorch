@@ -1723,6 +1723,17 @@ class TestScript(TestCase):
             return c
         self.checkScript(func, [], optimize=True)
 
+    def test_for_in_range_dynamic(self):
+        def func():
+            c = 0
+            for i in range(100):
+                acc = 0
+                for j in range(i):
+                    acc += j
+                c += acc
+            return c
+        self.checkScript(func, [], optimize=True)
+
     def test_bool_constant(self):
         def func():
             a = True
