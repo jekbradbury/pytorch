@@ -1723,6 +1723,12 @@ class TestScript(TestCase):
             return c
         self.checkScript(func, [], optimize=True)
 
+    def test_bool_constant(self):
+        def func():
+            a = True
+            return a
+        self.checkScript(script, [], optimize=True)
+
     def test_ternary(self):
         def func(a, b):
             c = 3
