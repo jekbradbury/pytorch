@@ -1715,6 +1715,14 @@ class TestScript(TestCase):
         inputs = self._make_scalar_vars([4321, 1234], torch.int)
         self.checkScript(func, inputs, optimize=True)
 
+    def test_for_in_range(self):
+        def func():
+            c = 0
+            for i in range(100):
+                c += i
+            return c
+        self.checkScript(func, [], optimize=True)
+
     def test_ternary(self):
         def func(a, b):
             c = 3
