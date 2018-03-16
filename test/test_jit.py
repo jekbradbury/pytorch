@@ -1734,6 +1734,19 @@ class TestScript(TestCase):
             return c
         self.checkScript(func, [], optimize=True)
 
+    def test_for_in_range_ast(self):
+        def func(zero, hunnid):
+            c = zero
+            for i in range(hunnid):
+                acc = zero
+                for j in range(i):
+                    acc += j
+                c += acc
+            return c
+
+        inputs = self._make_scalar_vars([0, 100], torch.int)
+        self.checkScript(func, inputs, optimize=True)
+
     def test_bool_constant(self):
         def func():
             a = True
